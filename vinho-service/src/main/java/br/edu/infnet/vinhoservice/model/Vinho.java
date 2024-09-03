@@ -8,18 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-enum Docura {
-    SECO,
-    DEMISEC,
-    DOCE
-}
-
-enum Cor {
-    BRANCO,
-    ROSE,
-    TINTO
-}
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
