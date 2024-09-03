@@ -46,8 +46,8 @@ public class VinhoController {
             return ResponseEntity.badRequest().build();
         }
 
-        vinhoService.update(vinho);
-        return ResponseEntity.ok().build();
+        Vinho updated = vinhoService.update(vinho);
+        return ResponseEntity.status(HttpStatus.OK).body(updated);
     }
 
     @DeleteMapping("/{id}")
