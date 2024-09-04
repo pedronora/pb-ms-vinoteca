@@ -1,4 +1,4 @@
-package br.edu.infnet.pedidoservice.service.clients;
+package br.edu.infnet.pedidoservice.service.client;
 
 import br.edu.infnet.pedidoservice.model.ImpostoResponsePayload;
 import br.edu.infnet.pedidoservice.model.Pedido;
