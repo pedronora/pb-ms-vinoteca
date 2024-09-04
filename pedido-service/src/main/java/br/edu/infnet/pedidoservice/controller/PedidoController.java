@@ -6,10 +6,9 @@ import br.edu.infnet.pedidoservice.service.ImpostoService;
 import br.edu.infnet.pedidoservice.service.PedidoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/")
@@ -28,5 +27,12 @@ public class PedidoController {
         pedidoService.salvar(pedido);
 
         return ResponseEntity.ok(pedido);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Pedido>> listarPedidos() {
+        List<Pedido> pedidos = pedidoService.getAll();
+
+        return ResponseEntity.ok(pedidos);
     }
 }
