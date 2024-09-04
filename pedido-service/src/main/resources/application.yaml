@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: pedido-service
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: pedidosdb
+server:
+  port: 8083
+
