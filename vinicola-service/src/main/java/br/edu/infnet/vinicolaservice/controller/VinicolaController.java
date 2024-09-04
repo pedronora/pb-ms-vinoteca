@@ -19,7 +19,7 @@ public class VinicolaController {
 
     @PostMapping
     public ResponseEntity<Vinicola> create(@RequestBody Vinicola vinicola) {
-        log.info("Criando um vinicola");
+        log.info("Criando uma vinicola");
         Vinicola saved = vinicolaService.create(vinicola);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
@@ -34,6 +34,7 @@ public class VinicolaController {
     public ResponseEntity<?> findById(@PathVariable Long id) {
         Optional<Vinicola> vinicola = vinicolaService.findById(id);
         if (vinicola.isPresent()) {
+            log.info("Buscando vinicola de ID {}", id);
             return ResponseEntity.ok(vinicola.get());
         } else {
             return ResponseEntity.notFound().build();
@@ -47,6 +48,7 @@ public class VinicolaController {
         }
 
         Vinicola updated = vinicolaService.update(vinicola);
+        log.info("Atualizando vinicola de ID {}", id);
         return ResponseEntity.status(HttpStatus.OK).body(updated);
     }
 
@@ -54,6 +56,7 @@ public class VinicolaController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         if (vinicolaService.findById(id).isPresent()) {
             vinicolaService.deleteById(id);
+            log.info("Deletando vinicola de ID {}", id);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
