@@ -1,3 +1,7 @@
+app:
+  myport: ${PORT:0}
+server:
+  port: ${app.myport}
 spring:
   application:
     name: pedido-service
@@ -6,8 +10,6 @@ spring:
       host: localhost
       port: 27017
       database: pedidosdb
-server:
-  port: 8083
 eureka:
   instance:
     instance-id: ${spring.application.name}:${random.value}

@@ -1,0 +1,26 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: vinhos
+          uri: lb://VINHO-SERVICE
+          filters:
+            - StripPrefix=1
+          predicates:
+            - Path=/vinho/**
+        - id: pedidos
+          uri: lb://PEDIDO-SERVICE
+          filters:
+            - StripPrefix=1
+          predicates:
+            - Path=/pedido/**
+  application:
+    name: gateway-service
+server:
+  port: 9999
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
+  client:
+    service-url:
+      defaultUrl: http://localhost:8761/eureka/

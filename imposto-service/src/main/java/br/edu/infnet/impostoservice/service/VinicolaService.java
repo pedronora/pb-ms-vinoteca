@@ -7,7 +7,7 @@ import org.springframework.web.client.RestClient;
 @Service
 public class VinicolaService {
     public Vinicola getById(Long id) {
-        var serverUrl = String.format("http://localhost:8082/api/vinicolas/%d", id);
+        var serverUrl = String.format("http://localhost:8082/%d", id);
         RestClient restClient = RestClient.create();
         return restClient
                 .get()
