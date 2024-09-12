@@ -9,11 +9,10 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -171,7 +170,7 @@ public class VinhoController {
     if (vinhoToDelete.isEmpty()) {
       log.error("Vinho não encontrado!");
       return ResponseEntity.status(HttpStatus.NOT_FOUND)
-              .body(new DetailPayload("Vinho não encontrado!"));
+          .body(new DetailPayload("Vinho não encontrado!"));
     }
 
     vinhoService.deleteById(id);
