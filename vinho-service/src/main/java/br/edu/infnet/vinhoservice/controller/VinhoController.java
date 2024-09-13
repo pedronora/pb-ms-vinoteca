@@ -89,7 +89,7 @@ public class VinhoController {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     } else {
       log.info("Buscando a lista de vinhos");
-      return ResponseEntity.ok(vinhoService.findAll());
+      return ResponseEntity.ok(vinhos);
     }
   }
 
