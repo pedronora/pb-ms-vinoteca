@@ -23,6 +23,7 @@ public class NotaFiscalController {
   public ResponseEntity<Map<String, String>> gerarNotaFiscal(@RequestBody Pedido pedido) {
     try {
       notaFiscalService.emitirNotaFiscal(pedido);
+      log.info("Nota Fiscal emitida para o pedido " + pedido.getId());
     } catch (JsonProcessingException e) {
       ResponseEntity.internalServerError().build();
       throw new RuntimeException(e);

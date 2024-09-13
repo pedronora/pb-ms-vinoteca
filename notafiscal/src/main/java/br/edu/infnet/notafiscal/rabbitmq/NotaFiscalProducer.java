@@ -15,6 +15,6 @@ public class NotaFiscalProducer {
 
   public void send(Pedido pedido) throws JsonProcessingException {
     amqpTemplate.convertAndSend(
-        "nota-fiscal-exc", "nota-fiscal-rk", objectMapper.writeValueAsString(pedido));
+        "nota-fiscal-ex", "nota-fiscal-rk", objectMapper.writeValueAsString(pedido));
   }
 }

@@ -2,11 +2,10 @@ package br.edu.infnet.pedidoservice.service;
 
 import br.edu.infnet.pedidoservice.model.Pedido;
 import br.edu.infnet.pedidoservice.repository.PedidoRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor

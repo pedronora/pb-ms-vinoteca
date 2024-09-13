@@ -1,6 +1,6 @@
 package br.edu.infnet.pedidoservice.service;
 
-import br.edu.infnet.pedidoservice.model.ImpostoResponsePayload;
+import br.edu.infnet.pedidoservice.payload.ImpostoResponsePayload;
 import br.edu.infnet.pedidoservice.model.Pedido;
 import br.edu.infnet.pedidoservice.service.client.ImpostoClient;
 import lombok.RequiredArgsConstructor;
