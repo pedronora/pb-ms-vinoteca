@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @OpenAPIDefinition(
-    info = @Info(title = "Vinho Service", description = "Microsserviços que integra o sistema da VINOTECA"))
+    info = @Info(title = "Vinho Service", description = "Microsserviço que integra o sistema da VINOTECA"))
 @SpringBootApplication
 public class VinhoServiceApplication {
 
