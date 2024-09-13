@@ -11,25 +11,25 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class PedidoService {
-    private final PedidoRepository pedidoRepository;
+  private final PedidoRepository pedidoRepository;
 
-    public Pedido salvar(Pedido pedido) {
-        return pedidoRepository.save(pedido);
-    }
+  public Pedido salvar(Pedido pedido) {
+    return pedidoRepository.save(pedido);
+  }
 
-    public List<Pedido> getAll(){
-        return pedidoRepository.findAll();
-    }
+  public List<Pedido> getAll() {
+    return pedidoRepository.findAll();
+  }
 
-    public Optional<Pedido> getById(String id){
-        return pedidoRepository.findById(id);
-    }
+  public Optional<Pedido> getById(String id) {
+    return pedidoRepository.findById(id);
+  }
 
-    public Pedido update(Pedido pedido){
-        return pedidoRepository.save(pedido);
-    }
+  public Pedido update(Pedido pedido) {
+    return pedidoRepository.save(pedido);
+  }
 
-    public void delelteById(String id) {
-        pedidoRepository.deleteById(id);
-    }
+  public void delelteById(String id) {
+    pedidoRepository.deleteById(id);
+  }
 }

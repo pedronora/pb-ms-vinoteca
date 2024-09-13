@@ -14,30 +14,32 @@ import java.math.BigDecimal;
 @Builder
 @Entity
 public class Vinho {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nome;
-    private BigDecimal preco;
-    private String uva;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private Docura docura;
-    @Enumerated(EnumType.STRING)
-    private Cor cor;
+  private String nome;
+  private BigDecimal preco;
+  private String uva;
 
-    @Column(name = "vinicola_id")
-    private int vinicolaId;
+  @Enumerated(EnumType.STRING)
+  private Docura docura;
 
-    private enum Docura {
-        SECO,
-        DEMISEC,
-        DOCE
-    }
+  @Enumerated(EnumType.STRING)
+  private Cor cor;
 
-    private enum Cor {
-        BRANCO,
-        ROSE,
-        TINTO
-    }
+  @Column(name = "vinicola_id")
+  private int vinicolaId;
+
+  private enum Docura {
+    SECO,
+    DEMISEC,
+    DOCE
+  }
+
+  private enum Cor {
+    BRANCO,
+    ROSE,
+    TINTO
+  }
 }

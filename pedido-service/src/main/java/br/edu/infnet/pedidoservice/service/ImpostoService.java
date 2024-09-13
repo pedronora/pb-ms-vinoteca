@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ImpostoService {
 
-    private final ImpostoClient impostoClient;
+  private final ImpostoClient impostoClient;
 
-    public ImpostoResponsePayload getTotalImposto(Pedido pedido) {
-        return impostoClient.calcularImposto(pedido);
-    }
+  public ImpostoResponsePayload getTotalImposto(Pedido pedido) {
+    return impostoClient.calcularImposto(pedido);
+  }
 }

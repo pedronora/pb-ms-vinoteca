@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "VINHO-SERVICE")
 public interface VinhoClient {
-    @GetMapping("/{id}")
-    Vinho getById(@PathVariable Long id);
+  @GetMapping("/{id}")
+  Vinho getById(@PathVariable Long id);
 }

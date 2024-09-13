@@ -12,23 +12,23 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 public class Vinho {
-    private Long id;
-    private String nome;
-    private BigDecimal preco;
-    private String uva;
-    private Docura docura;
-    private Cor cor;
-    private long vinicolaId;
+  private Long id;
+  private String nome;
+  private BigDecimal preco;
+  private String uva;
+  private Docura docura;
+  private Cor cor;
+  private long vinicolaId;
 
-    private enum Docura {
-        SECO,
-        DEMISEC,
-        DOCE
-    }
+  private enum Docura {
+    SECO,
+    DEMISEC,
+    DOCE
+  }
 
-    private enum Cor {
-        BRANCO,
-        ROSE,
-        TINTO
-    }
+  private enum Cor {
+    BRANCO,
+    ROSE,
+    TINTO
+  }
 }

@@ -12,11 +12,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 public class Vinicola {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nome;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private Pais pais;
+  private String nome;
+
+  @Enumerated(EnumType.STRING)
+  private Pais pais;
 }

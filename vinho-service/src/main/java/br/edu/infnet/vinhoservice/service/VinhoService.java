@@ -11,25 +11,25 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class VinhoService {
-    private final VinhoRepository vinhoRepository;
+  private final VinhoRepository vinhoRepository;
 
-    public Vinho create(Vinho vinho) {
-        return vinhoRepository.save(vinho);
-    }
+  public Vinho create(Vinho vinho) {
+    return vinhoRepository.save(vinho);
+  }
 
-    public List<Vinho> findAll() {
-        return vinhoRepository.findAll();
-    }
+  public List<Vinho> findAll() {
+    return vinhoRepository.findAll();
+  }
 
-    public Optional<Vinho> findById(Long id) {
-        return vinhoRepository.findById(id);
-    }
+  public Optional<Vinho> findById(Long id) {
+    return vinhoRepository.findById(id);
+  }
 
-    public Vinho update(Vinho vinho) {
-        return vinhoRepository.save(vinho);
-    }
+  public Vinho update(Vinho vinho) {
+    return vinhoRepository.save(vinho);
+  }
 
-    public void deleteById(Long id) {
-        vinhoRepository.deleteById(id);
-    }
+  public void deleteById(Long id) {
+    vinhoRepository.deleteById(id);
+  }
 }

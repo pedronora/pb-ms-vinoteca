@@ -16,8 +16,7 @@ import java.util.List;
 @Builder
 @Document(collection = "pedidos")
 public class Pedido {
-    @Id
-    private String id;
-    private List<ItemPedido> items;
-    private BigDecimal totalImposto;
+  @Id private String id;
+  private List<ItemPedido> items;
+  private BigDecimal totalImposto;
 }

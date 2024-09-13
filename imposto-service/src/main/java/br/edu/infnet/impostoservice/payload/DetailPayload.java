@@ -6,5 +6,5 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class DetailPayload {
-    private String detail;
+  private String detail;
 }

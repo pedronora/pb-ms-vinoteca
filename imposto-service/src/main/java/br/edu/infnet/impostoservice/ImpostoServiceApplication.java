@@ -8,8 +8,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 public class ImpostoServiceApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ImpostoServiceApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(ImpostoServiceApplication.class, args);
+  }
 }

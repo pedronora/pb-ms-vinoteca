@@ -2,11 +2,10 @@ package br.edu.infnet.vinicolaservice.service;
 
 import br.edu.infnet.vinicolaservice.model.Vinicola;
 import br.edu.infnet.vinicolaservice.repository.VinicolaRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor

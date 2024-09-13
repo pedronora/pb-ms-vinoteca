@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Vinicola {
-    private long id;
-    private String nome;
-    private Pais pais;
+  private long id;
+  private String nome;
+  private Pais pais;
 }

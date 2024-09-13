@@ -1,7 +1,7 @@
 package br.edu.infnet.pedidoservice.controller;
 
-import br.edu.infnet.pedidoservice.model.Pedido;
 import br.edu.infnet.pedidoservice.model.ImpostoResponsePayload;
+import br.edu.infnet.pedidoservice.model.Pedido;
 import br.edu.infnet.pedidoservice.payload.DetailPayload;
 import br.edu.infnet.pedidoservice.service.ImpostoService;
 import br.edu.infnet.pedidoservice.service.PedidoService;
@@ -10,14 +10,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/")
