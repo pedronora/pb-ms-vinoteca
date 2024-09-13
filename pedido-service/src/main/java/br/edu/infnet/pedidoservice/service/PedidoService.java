@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,5 +19,17 @@ public class PedidoService {
 
     public List<Pedido> getAll(){
         return pedidoRepository.findAll();
+    }
+
+    public Optional<Pedido> getById(String id){
+        return pedidoRepository.findById(id);
+    }
+
+    public Pedido update(Pedido pedido){
+        return pedidoRepository.save(pedido);
+    }
+
+    public void delelteById(String id) {
+        pedidoRepository.deleteById(id);
     }
 }
