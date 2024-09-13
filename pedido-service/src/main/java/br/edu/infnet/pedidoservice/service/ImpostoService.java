@@ -13,6 +13,6 @@ public class ImpostoService {
     private final ImpostoClient impostoClient;
 
     public ImpostoResponsePayload getTotalImposto(Pedido pedido) {
-        return impostoClient.getImposto(pedido);
+        return impostoClient.calcularImposto(pedido);
     }
 }

@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "IMPOSTO-SERVICE")
 public interface ImpostoClient {
-    @PostMapping
-    ImpostoResponsePayload getImposto(@RequestBody Pedido pedido);
+  @PostMapping
+  ImpostoResponsePayload calcularImposto(@RequestBody Pedido pedido);
 }

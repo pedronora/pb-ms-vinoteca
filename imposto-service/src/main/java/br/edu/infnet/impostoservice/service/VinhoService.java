@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class VinhoService {
-    private final VinhoClient vinhoClient;
+  private final VinhoClient vinhoClient;
 
-    public Vinho getById(Long id) {
-        return vinhoClient.getById(id);
-    }
+  public Vinho getById(Long id) {
+    return vinhoClient.getById(id);
+  }
 }
