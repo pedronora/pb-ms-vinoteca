@@ -21,8 +21,8 @@ public class NfConsumer {
   public void receive(@Payload String json) {
     try {
       Pedido pedido = objectMapper.readValue(json, Pedido.class);
-      log.info("Nota fiscal received: {}", pedido);
       nfService.processar(pedido);
+      log.info("Nota fiscal received: {}", pedido);
 
     } catch (JsonProcessingException e) {
       log.error(e.getMessage());

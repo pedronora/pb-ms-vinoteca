@@ -1,2 +1,23 @@
 server:
   port: 0
+spring:
+  rabbitmq:
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 3
+          initial-interval: 5000
+          multiplier: 2.0
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: pedronoraestudos@gmail.com
+    password: ddsf dkwx gzst sfgv
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
