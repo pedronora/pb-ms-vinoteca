@@ -1,0 +1,158 @@
+version: '3.8'
+
+services:
+  eureka-server:
+    image: eureka-server
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - eureka-network
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - eureka-network
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    networks:
+      - eureka-network
+    restart: unless-stopped
+
+  imposto-service:
+    image: imposto-service
+    build:
+      context: ./imposto-service
+      dockerfile: Dockerfile
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+    networks:
+      - eureka-network
+    restart: unless-stopped
+
+  pedido-service:
+    image: pedido-service
+    build:
+      context: ./pedido-service
+      dockerfile: Dockerfile
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_DATA_MONGODB_HOST: mongo
+      SPRING_DATA_MONGODB_PORT: 27017
+      SPRING_DATA_MONGODB_DATABASE: pedidosdb
+    depends_on:
+      - eureka-server
+      - mongo
+    networks:
+      - eureka-network
+    restart: unless-stopped
+
+  vinicola-service:
+    image: vinicola-service
+    build:
+      context: ./vinicola-service
+      dockerfile: Dockerfile
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+    networks:
+      - eureka-network
+    restart: unless-stopped
+
+  vinho-service:
+    image: vinho-service
+    build:
+      context: ./vinho-service
+      dockerfile: Dockerfile
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+    networks:
+      - eureka-network
+    restart: unless-stopped
+
+  notafiscal:
+    image: notafiscal
+    build:
+      context: ./notafiscal
+      dockerfile: Dockerfile
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: user
+      SPRING_RABBITMQ_PASSWORD: password
+    depends_on:
+      - eureka-server
+      - rabbitmq
+    networks:
+      - eureka-network
+    restart: unless-stopped
+
+  notafiscal-worker:
+    image: notafiscal-worker
+    build:
+      context: ./notafiscal-worker
+      dockerfile: Dockerfile
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: user
+      SPRING_RABBITMQ_PASSWORD: password
+    depends_on:
+      - eureka-server
+      - rabbitmq
+      - notafiscal
+    networks:
+      - eureka-network
+    restart: unless-stopped
+
+  gateway:
+    image: gateway
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    environment:
+      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+      - imposto-service
+      - pedido-service
+      - vinicola-service
+      - vinho-service
+      - notafiscal
+      - notafiscal-worker
+    ports:
+      - "9999:9999"
+    networks:
+      - eureka-network
+    restart: unless-stopped
+
+networks:
+  eureka-network:
+    driver: bridge
+
+volumes:
+  mongo-data:

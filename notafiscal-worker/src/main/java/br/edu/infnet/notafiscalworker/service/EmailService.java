@@ -18,5 +18,7 @@ public class EmailService {
     message.setSubject(subject);
     message.setText(text);
     mailSender.send(message);
+
+    log.info("Email enviado com sucesso para: " + to);
   }
 }
