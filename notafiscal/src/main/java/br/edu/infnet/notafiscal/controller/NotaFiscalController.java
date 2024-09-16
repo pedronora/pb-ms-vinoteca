@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/notafiscal")
+@RequestMapping
 @RequiredArgsConstructor
 @Slf4j
 @Tag(name = "NotaFiscal Controller", description = "Gerencia as operações relacionadas à emissão da Nota Fiscal")

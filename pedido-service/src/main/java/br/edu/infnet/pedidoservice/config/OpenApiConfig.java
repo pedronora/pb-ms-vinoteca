@@ -1,4 +1,4 @@
-package br.edu.infnet.pedidoservice;
+package br.edu.infnet.pedidoservice.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.servers.Server;
