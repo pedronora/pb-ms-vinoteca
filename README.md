@@ -63,7 +63,11 @@ Após os serviços estarem em execução, será necessário configurar a fila (`
 Depois de configurar o RabbitMQ, todos os serviços estarão rodando e se comunicando. Você pode acessar os endpoints dos microsserviços pelo gateway na porta 9999 (por exemplo, [http://localhost:9999/vinho](http://localhost:9999/vinho).
 
 
-### 5. Debug e Logs
+### 5. Documentação e Swagger
+
+A documentação foi gerada pelo Swagger e pode ser acessada em: [http://localhost:9999/docs](http://localhost:9999/docs)
+
+### 6. Debug e Logs
 
 Para visualizar os logs de execução dos serviços, utilize:
 
