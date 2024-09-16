@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Vinho Controller", description = "Gerencia as operações relacionadas aos vinhos")
 public class VinhoController {
   private final VinhoService vinhoService;
-  private final Validator validator;
 
   @Operation(summary = "Criar um vinho")
   @ApiResponses(
