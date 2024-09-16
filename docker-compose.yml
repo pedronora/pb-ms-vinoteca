@@ -127,7 +127,7 @@ services:
       - notafiscal
     networks:
       - eureka-network
-    restart: unless-stopped
+    restart: always
 
   gateway:
     image: gateway
