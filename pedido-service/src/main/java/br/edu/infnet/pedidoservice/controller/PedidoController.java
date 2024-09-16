@@ -14,6 +14,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.List;
 import java.util.Optional;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -45,6 +47,7 @@ public class PedidoController {
                           description = "Erro interno do servidor",
                           content = {@Content(schema = @Schema(implementation = DetailPayload.class))})
           })
+  @Tag(name = "Pedido Controller", description = "Gerencia as operações relacionadas à emissão de Pedidos")
   @PostMapping
   public ResponseEntity<?> cadastrarPedido(@RequestBody Pedido pedido) {
     if(pedido.getItems().isEmpty()) {
