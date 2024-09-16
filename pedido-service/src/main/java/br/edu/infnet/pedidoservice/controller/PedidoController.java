@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Pedido Controller", description = "Gerencia as operações relacionadas à emissão de Pedidos")
 public class PedidoController {
   private final PedidoService pedidoService;
   private final ImpostoService impostoService;
@@ -47,7 +48,6 @@ public class PedidoController {
                           description = "Erro interno do servidor",
                           content = {@Content(schema = @Schema(implementation = DetailPayload.class))})
           })
-  @Tag(name = "Pedido Controller", description = "Gerencia as operações relacionadas à emissão de Pedidos")
   @PostMapping
   public ResponseEntity<?> cadastrarPedido(@RequestBody Pedido pedido) {
     if(pedido.getItems().isEmpty()) {
