@@ -24,7 +24,7 @@ public class NfService {
       emailService.sendMail(
           "pedro.nora@al.infnet.edu.br",
           "Nota fiscal para o pedido " + pedido.getId(),
-          "Segue a Nota Fiscal para o seu pedido: " + pedido.getId());
+          "Segue a Nota Fiscal para o seu pedido: " + pedido.getId() + "\n\n" + pedido.toString());
       log.info("Nota Fiscal enviada por email.");
 
     } catch (MailException e) {

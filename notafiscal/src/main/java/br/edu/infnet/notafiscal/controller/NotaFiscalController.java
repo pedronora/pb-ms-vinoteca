@@ -37,10 +37,11 @@ public class NotaFiscalController {
   @PostMapping
   public ResponseEntity<Map<String, String>> gerarNotaFiscal(@RequestBody Pedido pedido) {
     try {
+      log.info("PEDIDO: {}", pedido);
       notaFiscalService.emitirNotaFiscal(pedido);
-      log.info("Nota Fiscal emitida para o pedido " + pedido.getId());
+      log.info("Nota Fiscal emitida para o pedido " + pedido);
     } catch (JsonProcessingException e) {
-      log.error("Erro ao emitir Nota Fiscal para o pedido " + pedido.getId(), e);
+      log.error("Erro ao emitir Nota Fiscal para o pedido " + pedido, e);
       return ResponseEntity.internalServerError().build();
     }
 

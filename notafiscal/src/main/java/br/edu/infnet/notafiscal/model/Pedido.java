@@ -11,6 +11,8 @@ import lombok.*;
 @ToString
 public class Pedido {
   private String id;
-  private List<ItemPedido> item;
+  private List<ItemPedido> items;
+  private BigDecimal subtotal;
   private BigDecimal totalImposto;
+  private BigDecimal total;
 }

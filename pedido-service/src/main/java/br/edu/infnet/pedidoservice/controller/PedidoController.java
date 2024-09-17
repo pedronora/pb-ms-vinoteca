@@ -12,6 +12,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +28,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/")
 @RequiredArgsConstructor
 @Slf4j
-@Tag(name = "Pedido Controller", description = "Gerencia as operações relacionadas à emissão de Pedidos")
+@Tag(
+    name = "Pedido Controller",
+    description = "Gerencia as operações relacionadas à emissão de Pedidos")
 public class PedidoController {
   private final PedidoService pedidoService;
   private final ImpostoService impostoService;
@@ -34,62 +38,70 @@ public class PedidoController {
 
   @Operation(summary = "Criar um pedido")
   @ApiResponses(
-          value = {
-                  @ApiResponse(
-                          responseCode = "201",
-                          description = "Pedido criado com sucesso",
-                          content = {@Content(schema = @Schema(implementation = Pedido.class))}),
-                  @ApiResponse(
-                          responseCode = "400",
-                          description = "Erro de validação",
-                          content = {@Content(schema = @Schema(implementation = DetailPayload.class))}),
-                  @ApiResponse(
-                          responseCode = "500",
-                          description = "Erro interno do servidor",
-                          content = {@Content(schema = @Schema(implementation = DetailPayload.class))})
-          })
+      value = {
+        @ApiResponse(
+            responseCode = "201",
+            description = "Pedido criado com sucesso",
+            content = {@Content(schema = @Schema(implementation = Pedido.class))}),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Erro de validação",
+            content = {@Content(schema = @Schema(implementation = DetailPayload.class))}),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Erro interno do servidor",
+            content = {@Content(schema = @Schema(implementation = DetailPayload.class))})
+      })
   @PostMapping
   public ResponseEntity<?> cadastrarPedido(@RequestBody Pedido pedido) {
-    if(pedido.getItems().isEmpty()) {
+    if (pedido.getItems().isEmpty()) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("O pedido não possui itens.");
     }
 
-    try{
+    try {
       log.info("Cadastrando pedido: {}", pedido);
-      // Calculo do Imposto a ser aplicado no Pedido
-      ImpostoResponsePayload impostoResponse = impostoService.getTotalImposto(pedido);
-      System.out.println("totalImposto: " + impostoResponse);
-      pedido.setTotalImposto(impostoResponse.totalImposto());
-      // Salvar pedido no banco com o imposto calculado
+      BigDecimal totalImposto = impostoService.getTotalImposto(pedido).totalImposto();
+
+      BigDecimal subtotal = pedidoService.calcularSubtotal(pedido);
+      pedido.setSubtotal(subtotal);
+      pedido.setTotalImposto(totalImposto);
+      pedido.setTotal(subtotal.add(totalImposto));
+
       Pedido pedidoSalvo = pedidoService.salvar(pedido);
 
-      nfService.emitirNotaFiscal(pedido);
+      log.info("Items: {}", pedidoSalvo.getItems());
+      log.info("Subtotal: {}", pedidoSalvo.getSubtotal());
+      log.info("TotalImposto: {}", pedidoSalvo.getTotalImposto());
+      log.info("Total: {}", pedidoSalvo.getTotal());
+
+      nfService.emitirNotaFiscal(pedidoSalvo);
 
       return ResponseEntity.status(HttpStatus.CREATED).body(pedidoSalvo);
-    } catch (Exception e){
+    } catch (Exception e) {
       log.error("Erro ao cadastrar pedido: {}", e.getMessage());
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new DetailPayload(e.getMessage()));
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .body(new DetailPayload(e.getMessage()));
     }
   }
 
   @Operation(summary = "Retorna a lista de pedidos")
   @ApiResponses(
-          value = {
-                  @ApiResponse(
-                          responseCode = "200",
-                          description = "OK",
-                          content = {
-                                  @Content(
-                                          mediaType = "application/json",
-                                          array = @ArraySchema(schema = @Schema(implementation = Pedido.class))),
-                          }),
-                  @ApiResponse(responseCode = "404", description = "Não há vinhos para exibir")
-          })
+      value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "OK",
+            content = {
+              @Content(
+                  mediaType = "application/json",
+                  array = @ArraySchema(schema = @Schema(implementation = Pedido.class))),
+            }),
+        @ApiResponse(responseCode = "404", description = "Não há vinhos para exibir")
+      })
   @GetMapping
   public ResponseEntity<List<Pedido>> listarPedidos() {
     List<Pedido> pedidos = pedidoService.getAll();
 
-    if(pedidos.isEmpty()){
+    if (pedidos.isEmpty()) {
       log.info("Não há PEDIDOS para serem apresentados.");
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     } else {
@@ -156,7 +168,9 @@ public class PedidoController {
     Pedido pedidoUpdated = new Pedido();
     pedidoUpdated.setId(id);
     pedidoUpdated.setItems(pedido.getItems());
+    pedidoUpdated.setSubtotal(pedido.getSubtotal());
     pedidoUpdated.setTotalImposto(pedido.getTotalImposto());
+    pedidoUpdated.setTotal(pedido.getTotal());
 
     Pedido updated = pedidoService.update(pedidoUpdated);
     log.info("Pedido atualizado com sucesso!");

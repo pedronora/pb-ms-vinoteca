@@ -18,5 +18,7 @@ import java.util.List;
 public class Pedido {
   @Id private String id;
   private List<ItemPedido> items;
+  private BigDecimal subtotal;
   private BigDecimal totalImposto;
+  private BigDecimal total;
 }
