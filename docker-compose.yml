@@ -32,6 +32,10 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: user
       RABBITMQ_DEFAULT_PASS: password
+    volumes:
+      - ./data:/var/lib/rabbitmq:rw
+      - ./rabbitmq-config/definitions.json:/opt/definitions.json:ro
+      - ./rabbitmq-config/rabbitmq.config:/etc/rabbitmq/rabbitmq.config:ro
     networks:
       - eureka-network
     restart: unless-stopped

@@ -40,34 +40,16 @@ docker-compose up -d --build
 Esse comando vai subir todos os serviços, incluindo os microsserviços, RabbitMQ, e MongoDB. Certifique-se de que o Docker está em execução no seu ambiente.
 
 
-#### 3. Configurar o RabbitMQ
-
-Após os serviços estarem em execução, será necessário configurar a fila (`queue`), a `exchange`, e a `routing key` no RabbitMQ.
-
-1. Acesse o painel de gerenciamento do RabbitMQ, acessível em [http://localhost:15672](http://localhost:15672).
-
-2. Faça login com as credenciais padrão configuradas no docker-compose.yml:
-
-* Usuário: user
-* Senha: password
-  
-3. Após o login, siga os passos para configurar a fila e a exchange:
-
-* Vá até a aba "Queues" e crie uma nova fila com o nome `nota-fiscal-queue`.
-* Vá até a aba "Exchanges" e crie uma nova exchange com o nome `nota-fiscal-exc` e o tipo `direct`.
-* Associe a fila `nota-fiscal-queue` à exchange `nota-fiscal-exc` utilizando a routing key `nota-fiscal-rk`.
-
-
-### 4. Verificar os Serviços
+### 3. Verificar os Serviços
 
 Depois de configurar o RabbitMQ, todos os serviços estarão rodando e se comunicando. Você pode acessar os endpoints dos microsserviços pelo gateway na porta 9999 (por exemplo, [http://localhost:9999/vinho](http://localhost:9999/vinho)).
 
 
-### 5. Documentação e Swagger
+### 4. Documentação e Swagger
 
 A documentação foi gerada pelo Swagger e pode ser acessada em: [http://localhost:9999/docs](http://localhost:9999/docs)
 
-### 6. Debug e Logs
+### 5. Debug e Logs
 
 Para visualizar os logs de execução dos serviços, utilize:
 
